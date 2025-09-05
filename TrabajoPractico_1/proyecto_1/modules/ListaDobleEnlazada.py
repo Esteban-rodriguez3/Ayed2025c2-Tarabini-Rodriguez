@@ -1,94 +1,130 @@
 class Nodo:
     def __init__(self, dato):
         self.dato = dato
-        self.prev = None
-        self.next = None
+        self.anterior = None
+        self.siguiente = None
 
 
 class ListaDobleEnlazada:
     def __init__(self):
-        self.primero = None
-        self.ultimo = None
-        self._longitud = 0
+        self.cabeza = None
+        self.cola = None
+        self.tamanio = 0
 
     def esta_vacia(self):
-        return self._longitud == 0
+        return self.tamanio == 0
 
     def agregar_al_inicio(self, item):
         nuevo = Nodo(item)
         if self.esta_vacia():
-            self.primero = self.ultimo = nuevo
+            self.cabeza = self.cola = nuevo
         else:
-            nuevo.next = self.primero
-            self.primero.prev = nuevo
-            self.primero = nuevo
-        self._longitud += 1
+            nuevo.siguiente = self.cabeza
+            self.cabeza.anterior = nuevo
+            self.cabeza = nuevo
+        self.tamanio += 1
 
     def agregar_al_final(self, item):
         nuevo = Nodo(item)
         if self.esta_vacia():
-            self.primero = self.ultimo = nuevo
+            self.cabeza = self.cola = nuevo
         else:
-            self.ultimo.next = nuevo
-            nuevo.prev = self.ultimo
-            self.ultimo = nuevo
-        self._longitud += 1
+            self.cola.siguiente = nuevo
+            nuevo.anterior = self.cola
+            self.cola = nuevo
+        self.tamanio += 1
 
     def insertar(self, item, posicion=None):
         if posicion is None:
             self.agregar_al_final(item)
             return
 
-        if posicion < 0 or posicion > self._longitud:
+        if posicion < 0 or posicion > self.tamanio:
             raise IndexError("Posición inválida")
 
         if posicion == 0:
             self.agregar_al_inicio(item)
-        elif posicion == self._longitud:
+        elif posicion == self.tamanio:
             self.agregar_al_final(item)
         else:
             nuevo = Nodo(item)
-            actual = self.primero
+            actual = self.cabeza
             for _ in range(posicion):
-                actual = actual.next
-            anterior = actual.prev
-            anterior.next = nuevo
-            nuevo.prev = anterior
-            nuevo.next = actual
-            actual.prev = nuevo
-            self._longitud += 1
+                actual = actual.siguiente
+            anterior = actual.anterior
+            anterior.siguiente = nuevo
+            nuevo.anterior = anterior
+            nuevo.siguiente = actual
+            actual.anterior = nuevo
+            self.tamanio += 1
 
     def extraer(self, posicion=None):
         if self.esta_vacia():
             raise IndexError("Lista vacía")
 
-        if posicion is None:
-            posicion = self._longitud - 1
+        if posicion is None or posicion == -1:
+            posicion = self.tamanio - 1
 
-        if posicion < 0 or posicion >= self._longitud:
+        if posicion < -1 or posicion >= self.tamanio:
             raise IndexError("Posición inválida")
 
         if posicion == 0:
-            dato = self.primero.dato
-            self.primero = self.primero.next
-            if self.primero:
-                self.primero.prev = None
+            dato = self.cabeza.dato
+            self.cabeza = self.cabeza.siguiente
+            if self.cabeza:
+                self.cabeza.anterior = None
             else:
-                self.ultimo = None
-        elif posicion == self._longitud - 1:
-            dato = self.ultimo.dato
-            self.ultimo = self.ultimo.prev
-            if self.ultimo:
-                self.ultimo.next = None
+                self.cola = None
+            self.tamanio -= 1
+        elif posicion == self.tamanio - 1:
+            dato = self.cola.dato
+            self.cola = self.cola.anterior
+            if self.cola:
+                self.cola.siguiente = None
             else:
-                self.primero = None
+                self.cabeza = None
+            self.tamanio -= 1
         else:
-            actual = self.primero
+            actual = self.cabeza
             for _ in range(posicion):
-                actual = actual.next
+                actual = actual.siguiente
             dato = actual.dato
-            actual.prev.next = actual.next
-            actual.next.prev = actual.prev
-
-        self._longitud -= 1
+            actual.anterior.siguiente = actual.siguiente
+            actual.siguiente.anterior = actual.anterior
+            self.tamanio -= 1
         return dato
+
+    def copiar (self):
+        lista_aux = ListaDobleEnlazada ()
+        actual = self.cabeza
+        while actual is not None:
+            lista_aux.agregar_al_final(actual.dato)
+            actual = actual.siguiente
+        return lista_aux
+    
+    def __str__(self):
+        # sirve para poder mostrar el contenido de una LDE por consola con la función print
+        elementos = []
+        actual = self.cabeza
+        while actual is not None:
+            elementos.append(str(actual.dato))
+            actual = actual.siguiente
+        return " <-> ".join(elementos)
+    
+    def __len__(self):
+       return self.tamanio
+
+if __name__ == "__main__":
+    # pruebas de uso
+
+    LDE1 = ListaDobleEnlazada()
+    LDE1.agregar_al_final(1)
+    LDE1.agregar_al_final(2)
+    LDE1.agregar_al_final(3)
+    LDE1.agregar_al_final(4)
+    print(LDE1)
+    lista = [1,2,3,4]
+    print(len(LDE1))
+    # LDE1.agregar_al_final(5)
+    # ....
+    # probar todos los métodos
