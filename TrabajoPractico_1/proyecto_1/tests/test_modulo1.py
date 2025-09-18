@@ -43,28 +43,23 @@ class Test_LDE(unittest.TestCase):
         counter = 0
         elementos = []
 
-        self.assertIsNone(nodo.anterior,
-                          "El elemento anterior a la cabeza de la lista debe ser None")
+        self.assertIsNone(nodo.anterior,"El elemento anterior a la cabeza de la lista debe ser None")
 
         while nodo is not None:
             counter += 1
             elementos.append(nodo.dato)
             nodo = nodo.siguiente
 
-        self.assertEqual(len(lista), counter,
-                         "Tamaño informado por la lista no coincide con la cantidad de nodos en la misma.")
+        self.assertEqual(len(lista), counter,"Tamaño informado por la lista no coincide con la cantidad de nodos en la misma.")
 
         # Recorro de atras para adelante
         nodo = lista.cola
 
-        self.assertIsNone(nodo.siguiente,
-                          "El elemento siguiente a la cola de la lista debe ser None")
+        self.assertIsNone(nodo.siguiente,"El elemento siguiente a la cola de la lista debe ser None")
 
         while nodo is not None:
             counter -= 1
-            self.assertEqual(elementos[counter], nodo.dato,
-                             "Los elementos en la lista recorrida de atras para adelante son diferentes "
-                             "a que si la recorremos de adelante para atrás.")
+            self.assertEqual(elementos[counter], nodo.dato,"Los elementos en la lista recorrida de atras para adelante son diferentes a que si la recorremos de adelante para atrás.")
             nodo = nodo.anterior
         
 # ----------------------------------------------------------------------------------------------------------------------------------
@@ -82,18 +77,15 @@ class Test_LDE(unittest.TestCase):
         lde2_copia.agregar_al_inicio(valorNuevo)
 
         self.recorrer_lista(lde2_copia)
-        self.assertEqual(len(self.lde_2), len(lde2_copia) - 1,
-                         "El tamaño de la lista luego de agregar debe incrementarse en uno")
+        self.assertEqual(len(self.lde_2), len(lde2_copia) - 1,"El tamaño de la lista luego de agregar debe incrementarse en uno")
 
         nodo_copia = lde2_copia.cabeza
-        self.assertEqual(nodo_copia.dato, valorNuevo,
-                         "El primer nodo no contiene el valor que se solicito agregar")
+        self.assertEqual(nodo_copia.dato, valorNuevo,"El primer nodo no contiene el valor que se solicito agregar")
 
         nodo_copia = nodo_copia.siguiente
         nodo_original = self.lde_2.cabeza
         while nodo_original.siguiente is not None:
-            self.assertEqual(nodo_original.dato, nodo_copia.dato,
-                             "Se modificaron los datos de la lista luego de agregar el nuevo elemento")
+            self.assertEqual(nodo_original.dato, nodo_copia.dato,"Se modificaron los datos de la lista luego de agregar el nuevo elemento")
             nodo_original = nodo_original.siguiente
             nodo_copia = nodo_copia.siguiente
 
@@ -102,13 +94,10 @@ class Test_LDE(unittest.TestCase):
         lde1_copia.agregar_al_inicio(valorNuevo)
 
         self.recorrer_lista(lde1_copia)
-        self.assertEqual(len(lde1_copia), 1,
-                         "Al agregar un elemento al inicio de una lista vacia, su nuevo tamaño debe ser uno")
+        self.assertEqual(len(lde1_copia), 1,"Al agregar un elemento al inicio de una lista vacia, su nuevo tamaño debe ser uno")
 
-        self.assertEqual(lde1_copia.cabeza.dato, valorNuevo,
-                         "El nodo agregado a la lista vacia no contiene el valor que se solicito agregar")
-        self.assertIs(lde1_copia.cabeza, lde1_copia.cola,
-                      "En una lista de un elemento, la cabeza es la misma que la cola")
+        self.assertEqual(lde1_copia.cabeza.dato, valorNuevo,"El nodo agregado a la lista vacia no contiene el valor que se solicito agregar")
+        self.assertIs(lde1_copia.cabeza, lde1_copia.cola,"En una lista de un elemento, la cabeza es la misma que la cola")
 
     def test_agregar_al_final(self):
         """
@@ -123,35 +112,28 @@ class Test_LDE(unittest.TestCase):
         lde2_copia.agregar_al_final(valorNuevo)
 
         self.recorrer_lista(lde2_copia)
-        self.assertEqual(len(self.lde_2), len(lde2_copia) - 1,
-                         "El tamaño de la lista luego de anexar debe incrementarse en uno")
+        self.assertEqual(len(self.lde_2), len(lde2_copia) - 1,"El tamaño de la lista luego de anexar debe incrementarse en uno")
 
         nodo_original = self.lde_2.cabeza
         nodo_copia = lde2_copia.cabeza
         while nodo_original.siguiente is not None:
-            self.assertEqual(nodo_original.dato, nodo_copia.dato,
-                             "Se modificaron los datos de la lista luego de anexar el nuevo elemento")
+            self.assertEqual(nodo_original.dato, nodo_copia.dato,"Se modificaron los datos de la lista luego de anexar el nuevo elemento")
             nodo_original = nodo_original.siguiente
             nodo_copia = nodo_copia.siguiente
 
         nodo_copia = nodo_copia.siguiente
-        self.assertEqual(nodo_copia.dato, valorNuevo,
-                         "El ultimo nodo no contiene el valor que se solicito agregar")
-        self.assertIs(nodo_copia, lde2_copia.cola,
-                      "El ultimo nodo no coincide con la refencia a la cola de la lista")
+        self.assertEqual(nodo_copia.dato, valorNuevo,"El ultimo nodo no contiene el valor que se solicito agregar")
+        self.assertIs(nodo_copia, lde2_copia.cola,"El ultimo nodo no coincide con la refencia a la cola de la lista")
 
         # Anexar en lista vacia (self.lde_1)
         lde1_copia = self.lde_1.copiar()
         lde1_copia.agregar_al_final(valorNuevo)
 
         self.recorrer_lista(lde1_copia)
-        self.assertEqual(len(lde1_copia), 1,
-                         "Al anexar un elemento en una lista vacia, su nuevo tamaño debe ser uno")
+        self.assertEqual(len(lde1_copia), 1,"Al anexar un elemento en una lista vacia, su nuevo tamaño debe ser uno")
 
-        self.assertEqual(lde1_copia.cabeza.dato, valorNuevo,
-                         "El nodo anexado a la lista vacia no contiene el valor que se solicito agregar")
-        self.assertIs(lde1_copia.cabeza, lde1_copia.cola,
-                      "En una lista de un elemento, la cabeza es la misma que la cola")
+        self.assertEqual(lde1_copia.cabeza.dato, valorNuevo,"El nodo anexado a la lista vacia no contiene el valor que se solicito agregar")
+        self.assertIs(lde1_copia.cabeza, lde1_copia.cola,"En una lista de un elemento, la cabeza es la misma que la cola")
 
     def test_insertar_extremos(self):
         """
@@ -217,10 +199,8 @@ class Test_LDE(unittest.TestCase):
         resultante de la LDE
         """
         # Extraer al inicio
-        self.assertEqual(self.lde_3.extraer(0), self.lista_aux_3.pop(0),
-                         "No se extrajo correctamente los elementos de la lista")
-        self.assertEqual(len(self.lde_3), self.n_elementos - 1,
-                         "No se actualizo debidamente el tamaño de la lista luego de extraer")
+        self.assertEqual(self.lde_3.extraer(0), self.lista_aux_3.pop(0),"No se extrajo correctamente los elementos de la lista")
+        self.assertEqual(len(self.lde_3), self.n_elementos - 1,"No se actualizo debidamente el tamaño de la lista luego de extraer")
         # Verificamos que la lista este correctamente enlazada
         self.recorrer_lista(self.lde_3)
 
