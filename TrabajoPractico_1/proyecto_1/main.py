@@ -21,7 +21,7 @@ tiempos_len = medir_tiempos(lambda l: len(l), N)
 tiempos_copiar = medir_tiempos(lambda l: l.copiar(), N)
 tiempos_invertir = medir_tiempos(lambda l: l.invertir(), N)
 
-with open('datos.csv', 'w', newline='') as archivo:
+with open('data/datos.csv', 'w', newline='') as archivo:
     salida = csv.writer(archivo, dialect='excel')
     salida.writerow(N)
     salida.writerow(tiempos_len)

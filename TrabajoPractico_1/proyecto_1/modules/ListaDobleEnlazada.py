@@ -112,15 +112,18 @@ class ListaDobleEnlazada:
     def concatenar(self, otra):
         if otra.esta_vacia():
             return
-        if self.esta_vacia():
-            self.cabeza = otra.cabeza
-            self.cola = otra.cola
-        else:
-            self.cola.siguiente = otra.cabeza
-            otra.cabeza.anterior = self.cola
-            self.cola = otra.cola
-        self.tamanio += len(otra)
-    
+        # if self.esta_vacia():
+        #     self.cabeza = otra.cabeza
+        #     self.cola = otra.cola
+        # else:
+        #     self.cola.siguiente = otra.cabeza
+        #     otra.cabeza.anterior = self.cola
+        #     self.cola = otra.cola
+        actual = otra.cabeza
+        while actual:
+            self.agregar_al_final(actual.dato)
+            actual = actual.siguiente
+     
     def __str__(self):
         # sirve para poder mostrar el contenido de una LDE por consola con la función print
         elementos = []
@@ -157,29 +160,39 @@ class ListaDobleEnlazada:
 if __name__ == "__main__":
     print('*** ENSAYOS ***')
     print('* INICIO')
-    lista = ListaDobleEnlazada()
-    if lista.esta_vacia():
-        print('lista sin elementos')
-    lista.agregar_al_final('abc')
-    lista.agregar_al_final('xyz')
-    lista.agregar_al_final('rst')
-    lista.agregar_al_final('00')
-    lista.agregar_al_inicio('ini')
-    lista.insertar('qqq',2)
-    print('cantidad de elementos:', len(lista))
-    print('elementos:', lista)
-    print('extraer la cola:', lista.extraer())
-    print('extraer la cabeza:', lista.extraer(0))
-    print('cantidad de elementos:', len(lista))
-    print('elementos:', lista)
-    lista.invertir()
-    print('lista invertida:', lista)
-    print('extraer tercer elemento', lista.extraer(2))
-    print('final', lista)
-    otra_lista = ListaDobleEnlazada()
-    otra_lista.agregar_al_final('chuchu')
-    otra_lista.agregar_al_final('zucuzucu')
-    otra_lista.agregar_al_final('pikipiki')
-    print('otra lista:', otra_lista)
-    print('listas sumadas:', lista+otra_lista)
+    lista1 = ListaDobleEnlazada()
+    lista2 = ListaDobleEnlazada()
+    # if lista.esta_vacia():
+    #     print('lista sin elementos')
+    # lista.agregar_al_final('abc')
+    # lista.agregar_al_final('xyz')
+    # lista.agregar_al_final('rst')
+    # lista.agregar_al_final('00')
+    # lista.agregar_al_inicio('ini')
+    # lista.insertar('qqq',2)
+    # print('cantidad de elementos:', len(lista))
+    # print('elementos:', lista)
+    # print('extraer la cola:', lista.extraer())
+    # print('extraer la cabeza:', lista.extraer(0))
+    # print('cantidad de elementos:', len(lista))
+    # print('elementos:', lista)
+    # lista.invertir()
+    # print('lista invertida:', lista)
+    # print('extraer tercer elemento', lista.extraer(2))
+    # print('final', lista)
+    # otra_lista = ListaDobleEnlazada()
+    # otra_lista.agregar_al_final('chuchu')
+    # otra_lista.agregar_al_final('zucuzucu')
+    # otra_lista.agregar_al_final('pikipiki')
+    # print('otra lista:', otra_lista)
+    # print('listas sumadas:', lista+otra_lista)
+    
+    for i in range(5):
+        lista1.agregar_al_final(i)
+        lista2.agregar_al_final(i+10)
+        
+    lista1.concatenar(lista2)
+    print('lista1 concatenada con lista2:', lista1)
+    print (len(lista1))
+    
     print('* FIN')
