@@ -6,6 +6,7 @@ from modules.carta import Carta
 class DequeEmptyError(Exception):
     pass  # Define una excepción personalizada para cuando el mazo está vacío
 
+#Clase Mazo
 class Mazo:
     def __init__(self):
         self.cartas = ListaDobleEnlazada() # MODIFICAR PARA HACERLO ASI
