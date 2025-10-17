@@ -14,9 +14,11 @@ def ordenamientoPorResiduos (unaLista):
 
 if __name__ == "__main__":
     import random
-    lista_prueba = [random.randint(10000, 99999) for _ in range(10)]
+    lista_prueba = [random.randint(10000, 99999) for _ in range(500)]
     print("Lista original:", lista_prueba)
     
     lista_ordenada = ordenamientoPorResiduos(lista_prueba)
-    
-    print("Lista ordenada:", lista_ordenada)
+    lista_ordenada_verificada = sorted(lista_prueba)
+
+    if lista_ordenada == lista_ordenada_verificada:
+        print("La lista ha sido ordenada correctamente.")

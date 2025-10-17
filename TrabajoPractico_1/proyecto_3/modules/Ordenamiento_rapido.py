@@ -42,6 +42,9 @@ def particion (unaLista, primero, ultimo):
      
 if __name__ == "__main__": 
     unaLista = [random.randint(10000, 99999) for _ in range(500)]  
-    print("Lista original:", unaLista)
+    
     ordenamientoRapido(unaLista)
-    print("Lista ordenada:", unaLista)
+    lista_ordenada = sorted (unaLista)
+    
+    if unaLista == lista_ordenada:
+        print("La lista ha sido ordenada correctamente.")

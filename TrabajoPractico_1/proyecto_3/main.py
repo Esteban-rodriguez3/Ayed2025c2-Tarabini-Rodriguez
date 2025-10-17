@@ -5,12 +5,12 @@ from modules.Burbuja import ordenamientoBurbuja
 from modules.Ordenamiento_rapido import ordenamientoRapido
 from modules.RS import ordenamientoPorResiduos
 
-CANTIDAD = 5000
+CANTIDAD = 1000
 REPETICIONES = 5
 
 print("* INICIO")
 
-enes = list(range(250,CANTIDAD+1,250))
+enes = list(range(25,CANTIDAD+1,25))
 # listas para guardar los tiempos de ordenamiento para los distintos 'enes'
 tiempos_burbuja = []
 tiempos_radixsort = []

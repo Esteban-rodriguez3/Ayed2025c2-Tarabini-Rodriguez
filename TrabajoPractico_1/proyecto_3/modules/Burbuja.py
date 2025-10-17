@@ -18,9 +18,10 @@ def ordenamientoBurbujaCorta(unaLista):
         numero_pasada = numero_pasada - 1
 
 if __name__ == "__main__": 
-    CANTIDAD = 10
+    CANTIDAD = 500
     ensayo = [random.randint(10000,99999) for _ in range(CANTIDAD)]
-    if CANTIDAD < 15:
-        print(ensayo)
+    ensayo_ordenado = sorted(ensayo)
     ordenamientoBurbuja(ensayo)
-    print(ensayo)
+        
+    if ensayo == ensayo_ordenado:
+        print("La lista ha sido ordenada correctamente.")
