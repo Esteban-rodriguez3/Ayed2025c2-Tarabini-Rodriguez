@@ -1,19 +1,18 @@
 from modules.monticulo import MonticuloBinario
 
-
-class ColaDePrioridad:
+class ColaDePrioridad: 
     def __init__(self):
-        self.items = MonticuloBinario()
+        self.__monticulo = MonticuloBinario () 
 
-    def estaVacia(self):
-        return self.items.tamanoActual == 0 
+    def agregar (self, elemento): #agregar un elemento segun su prioridad
+        self.__monticulo.insertar (elemento)
 
-    def agregar(self, item):
-        self.items.insertar(item)
+    def sacar (self): #elimina y devuelve el elemento de mayor prioridad (el minimo)
+        return self.__monticulo.eliminarMinimo ()
 
-    def avanzar(self):
-        return self.items.eliminarMin()
+    def __len__ (self): #devuelve la cantidad de elementos en la cola 
+        return len (self.__monticulo)
 
-    def tamano(self):
-        return self.items.tamanoActual
-     
+    def __str__(self):
+        # Devuelve la representación en string del montículo
+        return str(self.__monticulo)
